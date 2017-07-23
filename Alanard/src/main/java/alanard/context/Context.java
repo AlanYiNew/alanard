@@ -3,6 +3,7 @@ package alanard.context;
 import java.util.HashMap;
 import java.util.Map;
 
+import alanard.database.Databaseconnection;
 import alanard.parsers.Commonparser;
 
 public class Context {
@@ -22,8 +23,12 @@ public class Context {
 		//TODO May need to make it more flexible for users to define their own singleton here
 		Commonparser cparser = new Commonparser();
 		context.put(Commonparser.class, cparser);
-		cparser.initCommonParser();
 		System.out.println("Finished initializing commonparser");
+		
+		Databaseconnection dbconnection = new Databaseconnection();
+		context.put(Databaseconnection.class, dbconnection);
+		System.out.println("Finished initializing dbconnection");
+		context.put(Commonparser.class, cparser);
 	}
 	
 	public Object getInstance(Class<?> type) {

@@ -20,10 +20,10 @@ public class Commonparser {
 	public Commonparser() {
 		
 		parser = new HashMap<String,Object>();
-		
+		initCommonParser();
 	}
 	
-	public Errors initCommonParser() {
+	private Errors initCommonParser() {
 		
 		JSONObject jObj;
 		try {
@@ -45,6 +45,7 @@ public class Commonparser {
 	}
 	
 	private void parse(String path,JSONObject jObj) {
+		
 		Set<String> keys = jObj.keySet();
 		for (String key:keys) {
 			Object v = jObj.get(key);
@@ -54,5 +55,6 @@ public class Commonparser {
 				parser.put(path+key, v);
 			}
 		}
+	
 	}
 }
