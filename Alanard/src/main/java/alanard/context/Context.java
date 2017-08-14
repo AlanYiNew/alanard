@@ -5,6 +5,7 @@ import java.util.Map;
 
 import alanard.database.Databaseconnection;
 import alanard.parsers.Commonparser;
+import cache.JedisConnection;
 
 public class Context {
 	private static Map<Class<?>,Object> context;
@@ -28,7 +29,12 @@ public class Context {
 		Databaseconnection dbconnection = new Databaseconnection();
 		context.put(Databaseconnection.class, dbconnection);
 		System.out.println("Finished initializing dbconnection");
-		context.put(Commonparser.class, cparser);
+
+		
+		JedisConnection jdConnection = new JedisConnection(cparser.getObject("jedis"));
+		context.put(JedisConnection.class, jdConnection);
+		System.out.println("Finished initializing jdconnection");
+		
 	}
 	
 	public Object getInstance(Class<?> type) {
